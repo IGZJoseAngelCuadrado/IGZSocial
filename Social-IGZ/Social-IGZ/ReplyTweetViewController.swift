@@ -40,4 +40,13 @@ class ReplyTweetViewController : UIViewController, UITextViewDelegate
     {
         
     }
+    
+    @IBAction func btnCancelTouched(sender: AnyObject)
+    {
+        var parentView = self.parentViewController as TweetDetailViewController
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            parentView.backgroundView.alpha = 0
+            parentView.containerReply.hidden = true
+        })
+    }
 }
