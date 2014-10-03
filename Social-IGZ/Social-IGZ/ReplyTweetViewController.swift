@@ -28,8 +28,11 @@ class ReplyTweetViewController : UIViewController, UITextViewDelegate
     {
         super.viewDidLoad()
         
+        tweetSelected = Singleton.sharedInstance.currentTweet!
+        
         self.view.layer.cornerRadius = 8.0
         
+        txtReply.text = "@\(tweetSelected.screenName) "
         txtReply.layer.borderColor = UIColor.lightGrayColor().CGColor
         txtReply.layer.borderWidth = 1.0
         txtReply.layer.cornerRadius = 8.0

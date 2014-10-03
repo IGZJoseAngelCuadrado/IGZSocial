@@ -11,7 +11,7 @@ import UIKit
 import Social
 import Accounts
 
-class TweetDetailViewController : UIViewController//, UITextViewDelegate
+class TweetDetailViewController : UIViewController
 {
     @IBOutlet weak var lblScreenName: UILabel!
     @IBOutlet weak var lblName: UILabel!
@@ -38,6 +38,8 @@ class TweetDetailViewController : UIViewController//, UITextViewDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        tweetSelected = Singleton.sharedInstance.currentTweet!
         
         lblScreenName.text = "@" + tweetSelected.screenName
         lblName.text = tweetSelected.name
@@ -145,109 +147,11 @@ class TweetDetailViewController : UIViewController//, UITextViewDelegate
     }
     
     @IBAction func btnReplyTouched(sender: AnyObject)
-    {
+    {        
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             self.backgroundView.alpha = 0.5
             self.containerReply.hidden = false
         })
-    }
-    
-    @IBAction func btnReplyTouched2(sender: AnyObject)
-    {
-//        let accountType = self.account.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
-//        self.account.requestAccessToAccountsWithType(accountType, options: nil, completion:
-//            {(granted: Bool!, error: NSError!) in
-//                if granted!
-//                {
-//                    let arrayOfAccounts = self.account.accountsWithAccountType(accountType)
-//                    if arrayOfAccounts.count > 0
-//                    {
-//                        let twitterAccount:ACAccount = arrayOfAccounts[arrayOfAccounts.count-1] as ACAccount
-//                        let requestURL = NSURL.URLWithString("https://api.twitter.com/1.1/statuses/update.json")
-//                        let parameters = [
-//                            "in_reply_to_status_id" : self.tweetSelected.idTweet,
-//                        ]
-//                        self.request = SLRequest.init(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.POST, URL: requestURL, parameters: parameters)
-//                        self.request!.account = twitterAccount
-//                        self.request!.performRequestWithHandler(
-//                            {(responseData: NSData!, urlResponse: NSHTTPURLResponse!, error: NSError!) in
-//                                if error != nil
-//                                {
-//                                    var alert = UIAlertController(title: "Alerta", message: "Error al realizar la acción", preferredStyle: UIAlertControllerStyle.Alert)
-//                                    alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-//                                    self.presentViewController(alert, animated: true, completion: nil)
-//                                }
-//                                else
-//                                {
-//                                    self.btnFav.enabled = false
-//                                }
-//                        })
-//                    }
-//                    else
-//                    {
-//                        var alert = UIAlertController(title: "Alerta", message: "No hay ninguna cuenta de Twitter asociada a este dispositivo", preferredStyle: UIAlertControllerStyle.Alert)
-//                        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-//                        self.presentViewController(alert, animated: true, completion: nil)
-//                    }
-//                }
-//                else
-//                {
-//                    println("Granted error: \(error.localizedDescription)")
-//                }
-//        })
-        
-        let tweetSheet = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-        tweetSheet.setInitialText("@" + tweetSelected.screenName)
-        
-        tweetSheet.completionHandler = {
-            (result: SLComposeViewControllerResult) in
-                if result == SLComposeViewControllerResult.Done
-                {
-                    let accountType = self.account.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
-                    self.account.requestAccessToAccountsWithType(accountType, options: nil, completion:
-                        {(granted: Bool!, error: NSError!) in
-                            if granted!
-                            {
-                                let arrayOfAccounts = self.account.accountsWithAccountType(accountType)
-                                if arrayOfAccounts.count > 0
-                                {
-                                    let twitterAccount:ACAccount = arrayOfAccounts[arrayOfAccounts.count-1] as ACAccount
-                                    let requestURL = NSURL.URLWithString("https://api.twitter.com/1.1/statuses/update.json?")
-                                    var parameters = Dictionary<String, AnyObject>()
-                                    parameters["in_reply_to_status_id"] = "\(self.tweetSelected.idTweet)"
-                                    parameters["status"] = tweetSheet.title
-                                    self.request = SLRequest.init(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.POST, URL: requestURL, parameters: parameters)
-                                    self.request!.account = twitterAccount
-                                    self.request!.performRequestWithHandler(
-                                        {(responseData: NSData!, urlResponse: NSHTTPURLResponse!, error: NSError!) in
-                                            if error != nil
-                                            {
-                                                var alert = UIAlertController(title: "Alerta", message: "Error al realizar la acción", preferredStyle: UIAlertControllerStyle.Alert)
-                                                alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-                                                self.presentViewController(alert, animated: true, completion: nil)
-                                            }
-                                            else
-                                            {
-                                                self.btnReply.enabled = false
-                                            }
-                                    })
-                                }
-                                else
-                                {
-                                    var alert = UIAlertController(title: "Alerta", message: "No hay ninguna cuenta de Twitter asociada a este dispositivo", preferredStyle: UIAlertControllerStyle.Alert)
-                                    alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-                                    self.presentViewController(alert, animated: true, completion: nil)
-                                }
-                            }
-                            else
-                            {
-                                println("Granted error: \(error.localizedDescription)")
-                            }
-                    })
-                }
-            }
-        
-        self.presentViewController(tweetSheet, animated: true, completion: nil);
     }
     
 }

@@ -99,18 +99,18 @@ class TwitterViewController: UITableViewController
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        lastTweetSelected = generateTweet(indexPath.row)
+        Singleton.sharedInstance.currentTweet = generateTweet(indexPath.row)
         self.performSegueWithIdentifier("TweetDetail", sender: self)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
-    {
-        if segue.identifier == "TweetDetail"
-        {
-            var tweetDetail = segue.destinationViewController as TweetDetailViewController
-            tweetDetail.tweetSelected = self.lastTweetSelected!
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+//    {
+//        if segue.identifier == "TweetDetail"
+//        {
+//            var tweetDetail = segue.destinationViewController as TweetDetailViewController
+//            tweetDetail.tweetSelected = self.lastTweetSelected!
+//        }
+//    }
     
     /**************************************
         Get Data
