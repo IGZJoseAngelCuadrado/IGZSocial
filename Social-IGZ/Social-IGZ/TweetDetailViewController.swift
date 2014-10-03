@@ -146,8 +146,10 @@ class TweetDetailViewController : UIViewController//, UITextViewDelegate
     
     @IBAction func btnReplyTouched(sender: AnyObject)
     {
-        self.backgroundView.alpha = 0.5
-        self.containerReply.hidden = false
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.backgroundView.alpha = 0.5
+            self.containerReply.hidden = false
+        })
     }
     
     @IBAction func btnReplyTouched2(sender: AnyObject)
