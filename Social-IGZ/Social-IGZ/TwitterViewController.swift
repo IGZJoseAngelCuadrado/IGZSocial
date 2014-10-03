@@ -103,15 +103,6 @@ class TwitterViewController: UITableViewController
         self.performSegueWithIdentifier("TweetDetail", sender: self)
     }
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
-//    {
-//        if segue.identifier == "TweetDetail"
-//        {
-//            var tweetDetail = segue.destinationViewController as TweetDetailViewController
-//            tweetDetail.tweetSelected = self.lastTweetSelected!
-//        }
-//    }
-    
     /**************************************
         Get Data
     **************************************/

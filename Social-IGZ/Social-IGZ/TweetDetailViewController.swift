@@ -152,6 +152,8 @@ class TweetDetailViewController : UIViewController
             self.backgroundView.alpha = 0.5
             self.containerReply.hidden = false
         })
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("changeHideValue", object: nil)
     }
     
 }
