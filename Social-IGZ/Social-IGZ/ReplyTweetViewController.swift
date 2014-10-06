@@ -86,7 +86,7 @@ class ReplyTweetViewController : UIViewController, UITextViewDelegate
                     if arrayOfAccounts.count > 0
                     {
                         let twitterAccount:ACAccount = arrayOfAccounts[arrayOfAccounts.count-1] as ACAccount
-                        let requestURL = NSURL.URLWithString("https://api.twitter.com/1.1/statuses/update.json?")
+                        let requestURL = NSURL.URLWithString("https://api.twitter.com/1.1/statuses/update.json")
                         var parameters = Dictionary<String, AnyObject>()
                         parameters["in_reply_to_status_id"] = "\(self.tweetSelected.idTweet)"
                         parameters["status"] = self.txtReply.text
