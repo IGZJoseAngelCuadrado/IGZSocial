@@ -128,39 +128,35 @@ class TwitterViewController: UITableViewController
                         self.request!.performRequestWithHandler(
                             {(responseData: NSData!, urlResponse: NSHTTPURLResponse!, error: NSError!) in
                                 var jsonError:NSError?
-                                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-                                    self.datasource = NSJSONSerialization.JSONObjectWithData(responseData, options: NSJSONReadingOptions.MutableContainers, error: &jsonError) as? NSArray
-                                    dispatch_async(dispatch_get_main_queue(),{
-                                        if self.datasource != nil
+                                self.datasource = NSJSONSerialization.JSONObjectWithData(responseData, options: NSJSONReadingOptions.MutableContainers, error: &jsonError) as? NSArray
+                                dispatch_async(dispatch_get_main_queue(),{
+                                    if self.datasource != nil
+                                    {
+                                        if self.datasource!.count != 0
                                         {
-                                            if self.datasource!.count != 0
-                                            {
-                                                println("Timeline Response: \(self.datasource)")
-                                                self.tableView.reloadData()
-                                                self.refreshControl!.endRefreshing()
-                                            }
-                                        }
-                                        else
-                                        {
-                                            var alert = UIAlertController(title: "Alerta", message: "Error recuperando la información", preferredStyle: UIAlertControllerStyle.Alert)
-                                            alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-                                            self.presentViewController(alert, animated: true, completion: nil)
+                                            println("Timeline Response: \(self.datasource)")
+                                            self.tableView.reloadData()
                                             self.refreshControl!.endRefreshing()
                                         }
-                                    })
+                                    }
+                                    else
+                                    {
+                                        var alert = UIAlertController(title: "Alerta", message: "Error recuperando la información", preferredStyle: UIAlertControllerStyle.Alert)
+                                        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+                                        self.presentViewController(alert, animated: true, completion: nil)
+                                        self.refreshControl!.endRefreshing()
+                                    }
                                 })
                         })
                     }
                     else
                     {
-                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-                            self.addTweet.enabled = false
-                            var alert = UIAlertController(title: "Alerta", message: "No hay ninguna cuenta de Twitter asociada a este dispositivo", preferredStyle: UIAlertControllerStyle.Alert)
-                            alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-                            dispatch_async(dispatch_get_main_queue(),{
-                                self.refreshControl!.endRefreshing()
-                                self.presentViewController(alert, animated: true, completion: nil)
-                            })
+                        self.addTweet.enabled = false
+                        var alert = UIAlertController(title: "Alerta", message: "No hay ninguna cuenta de Twitter asociada a este dispositivo", preferredStyle: UIAlertControllerStyle.Alert)
+                        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.refreshControl!.endRefreshing()
+                            self.presentViewController(alert, animated: true, completion: nil)
                         })
                     }
                 }

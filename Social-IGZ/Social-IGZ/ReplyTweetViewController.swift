@@ -77,13 +77,10 @@ class ReplyTweetViewController : UIViewController, UITextViewDelegate
                             {(responseData: NSData!, urlResponse: NSHTTPURLResponse!, error: NSError!) in
                                 if error != nil
                                 {
-                                    // REVISAR HILOS -> MOVER AL PRINCIPAL
-                                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-                                        var alert = UIAlertController(title: "Alerta", message: "Error al realizar la acción", preferredStyle: UIAlertControllerStyle.Alert)
-                                        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-                                        dispatch_async(dispatch_get_main_queue(),{
-                                            self.presentViewController(alert, animated: true, completion: nil)
-                                        })
+                                    var alert = UIAlertController(title: "Alerta", message: "Error al realizar la acción", preferredStyle: UIAlertControllerStyle.Alert)
+                                    alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+                                    dispatch_async(dispatch_get_main_queue(),{
+                                        self.presentViewController(alert, animated: true, completion: nil)
                                     })
                                 }
                                 else
@@ -94,12 +91,10 @@ class ReplyTweetViewController : UIViewController, UITextViewDelegate
                     }
                     else
                     {
-                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-                            var alert = UIAlertController(title: "Alerta", message: "No hay ninguna cuenta de Twitter asociada a este dispositivo", preferredStyle: UIAlertControllerStyle.Alert)
-                            alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-                            dispatch_async(dispatch_get_main_queue(),{
-                                self.presentViewController(alert, animated: true, completion: nil)
-                            })
+                        var alert = UIAlertController(title: "Alerta", message: "No hay ninguna cuenta de Twitter asociada a este dispositivo", preferredStyle: UIAlertControllerStyle.Alert)
+                        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.presentViewController(alert, animated: true, completion: nil)
                         })
                     }
                 }
