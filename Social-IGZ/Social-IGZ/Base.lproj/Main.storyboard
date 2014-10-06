@@ -289,10 +289,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OnQ-Oj-uLn">
-                                <rect key="frame" x="15" y="20" width="270" height="130"/>
+                                <rect key="frame" x="15" y="20" width="270" height="114"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="130" id="aG0-la-eQo"/>
+                                    <constraint firstAttribute="height" constant="114" id="aG0-la-eQo"/>
                                     <constraint firstAttribute="width" constant="270" id="nhw-UP-pkR"/>
                                 </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
@@ -341,11 +341,23 @@
                                     <constraint firstItem="nek-OH-HsF" firstAttribute="top" secondItem="61B-FT-dDy" secondAttribute="top" constant="10" id="kuZ-8b-6uB"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXF-Uz-xIb">
+                                <rect key="frame" x="133" y="138" width="35" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="RBs-l0-GOU"/>
+                                    <constraint firstAttribute="height" constant="18" id="meg-r7-XBF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="aXF-Uz-xIb" firstAttribute="top" secondItem="RKC-wl-Cuc" secondAttribute="bottom" constant="138" id="0Lh-al-Kbm"/>
                             <constraint firstAttribute="centerX" secondItem="61B-FT-dDy" secondAttribute="centerX" id="3zW-P7-N0b"/>
                             <constraint firstItem="OnQ-Oj-uLn" firstAttribute="top" secondItem="RKC-wl-Cuc" secondAttribute="bottom" constant="20" id="DhF-tC-zMo"/>
+                            <constraint firstAttribute="centerX" secondItem="aXF-Uz-xIb" secondAttribute="centerX" id="a5N-Sx-Ph6"/>
                             <constraint firstItem="OnQ-Oj-uLn" firstAttribute="leading" secondItem="XUy-hg-qnO" secondAttribute="leadingMargin" id="abg-MM-Ile"/>
                             <constraint firstItem="KtC-b2-DCv" firstAttribute="top" secondItem="61B-FT-dDy" secondAttribute="bottom" constant="8" id="bs5-PE-fD8"/>
                             <constraint firstAttribute="centerX" secondItem="OnQ-Oj-uLn" secondAttribute="centerX" id="jj7-sD-Rur"/>
@@ -359,6 +371,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="210"/>
                     <connections>
+                        <outlet property="btnPost" destination="Ihv-9b-A5Y" id="ewI-6e-scq"/>
+                        <outlet property="lblCharacters" destination="aXF-Uz-xIb" id="fMo-qG-OPA"/>
                         <outlet property="txtReply" destination="OnQ-Oj-uLn" id="2yU-i5-fcw"/>
                     </connections>
                 </viewController>

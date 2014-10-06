@@ -18,6 +18,8 @@ class ReplyTweetViewController : UIViewController, UITextViewDelegate
     private let account = ACAccountStore()
     
     @IBOutlet weak var txtReply: UITextView!
+    @IBOutlet weak var lblCharacters: UILabel!
+    @IBOutlet weak var btnPost: UIButton!
 
     deinit
     {
@@ -44,6 +46,8 @@ class ReplyTweetViewController : UIViewController, UITextViewDelegate
         txtReply.layer.borderWidth = 1.0
         txtReply.layer.cornerRadius = 8.0
         txtReply.delegate = self
+        
+        lblCharacters.text = String(140 - countElements(txtReply.text))
     }
     
     override func viewWillAppear(animated: Bool)
@@ -54,6 +58,21 @@ class ReplyTweetViewController : UIViewController, UITextViewDelegate
     func enterReply(Notification: NSNotification)
     {
         txtReply.becomeFirstResponder()
+    }
+    
+    func textViewDidChange(textView: UITextView)
+    {
+        lblCharacters.text = String(140 - countElements(txtReply.text))
+        if countElements(txtReply.text) <= 140
+        {
+            lblCharacters.textColor = UIColor.blackColor()
+            btnPost.enabled = true
+        }
+        else
+        {
+            lblCharacters.textColor = UIColor.redColor()
+            btnPost.enabled = false
+        }
     }
     
     @IBAction func btnPostTouched(sender: AnyObject)
